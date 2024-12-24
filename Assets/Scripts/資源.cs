@@ -7,6 +7,7 @@ public class 資源 : MonoBehaviour
     [SerializeField] int 數值 = 0;
     public TextMeshPro 文字;
     public string 字串;
+    public GameObject 小兵;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,6 +30,15 @@ public class 資源 : MonoBehaviour
             數值++;
             文字.text = 符號 + 數值.ToString();
             Destroy(other.gameObject);
+        }
+        else if(other.tag == "Player")
+        {
+            for(int i = 0; i < 數值; i++)
+            {
+                Instantiate(小兵,this.transform.position, Quaternion.identity);
+            }
+
+            Destroy(this.gameObject);
         }
     }
 
