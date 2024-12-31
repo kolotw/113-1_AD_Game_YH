@@ -8,7 +8,7 @@ public class 玩家控制器 : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        InvokeRepeating("發射子彈", 1f, 0.5f);
+        //InvokeRepeating("發射子彈", 1f, 0.5f);
     }
 
     // Update is called once per frame

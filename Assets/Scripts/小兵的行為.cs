@@ -22,7 +22,7 @@ public class 小兵的行為 : MonoBehaviour
     void Update()
     {
         this.transform.eulerAngles = 鎖定方向; 
-        if(Vector3.Distance(this.transform.position,目標.position) > 1.2f)
+        if(Vector3.Distance(this.transform.position,目標.position) > 3.2f)
         {
             專員.isStopped = false;
             專員.SetDestination(目標.position);

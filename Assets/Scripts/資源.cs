@@ -8,6 +8,7 @@ public class 資源 : MonoBehaviour
     public TextMeshPro 文字;
     public string 字串;
     public GameObject 小兵;
+    GameObject[] soliders;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,22 +26,64 @@ public class 資源 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "我方子彈")
+        /*
+        //邏輯運算符號： 
+        1. == 就是等於的意思
+        2. || 或者
+        3. && 而且
+        4. <
+        5. >
+         */
+        if (符號 == "+")
         {
-            數值++;
-            文字.text = 符號 + 數值.ToString();
-            Destroy(other.gameObject);
-        }
-        else if(other.tag == "Player")
-        {
-            for(int i = 0; i < 數值; i++)
+            if (other.tag == "我方子彈")
             {
-                Instantiate(小兵,this.transform.position, Quaternion.identity);
+                數值++;
+                文字.text = 符號 + 數值.ToString();
+                Destroy(other.gameObject);
             }
+            增加小兵(other);
+        }        
+        else if (符號 == "-")
+        {
+            尋找小兵數();
+            if (soliders.Length < 數值) 數值 = soliders.Length;
+            for (int i = 0; i < 數值; i++) 
+            {
+                Destroy(soliders[i]);
+            }
+            Destroy(this.gameObject);
+        }
+        else if (符號 == "x")
+        {
+            尋找小兵數();
+            數值 = (數值 * soliders.Length) - 數值;
+            增加小兵(other);
+        }
+        else if (符號 == "÷")
+        {
+            /*
+             目前小兵數 3  /  2  = 1 餘 1 ---> 減2 
+             四捨五入 RoundToInt
+             */
+            尋找小兵數();
 
+        }
+    }
+    void 尋找小兵數()
+    {
+        soliders = GameObject.FindGameObjectsWithTag("小兵");        
+    }
+    void 增加小兵(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            for (int i = 0; i < 數值; i++)
+            {
+                Instantiate(小兵, this.transform.position, Quaternion.identity);
+            }
             Destroy(this.gameObject);
         }
     }
-
 
 }
