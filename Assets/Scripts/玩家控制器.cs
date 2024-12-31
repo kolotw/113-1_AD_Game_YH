@@ -23,11 +23,12 @@ public class 玩家控制器 : MonoBehaviour
             // 使用 Raycast 檢測，確保射線擊中目標圖層
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                if (hit.transform.tag != "Player")
+                if (hit.transform.tag == "Floor")
                 {
                     // 移動 targetObject 到擊中的位置
                     Vector3 targetPosition = hit.point;
                     targetPosition.y = 0;
+                    targetPosition.z = hit.point.z + 1;
                     this.transform.position = targetPosition;
                 }
             }
