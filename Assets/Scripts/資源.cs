@@ -57,21 +57,31 @@ public class 資源 : MonoBehaviour
         else if (符號 == "x")
         {
             尋找小兵數();
+            print(數值);
             數值 = (數值 * soliders.Length) - 數值;
+            print(數值);
             增加小兵(other);
         }
         else if (符號 == "÷")
         {
             /*
-             目前小兵數 3  /  2  = 1 餘 1 ---> 減2 
+             目前小兵數 6  /  (數值)3  = 2 餘 0 ---> 減4(數值) 
              四捨五入 RoundToInt
              */
             尋找小兵數();
-
+            float minus = (soliders.Length / 數值);
+            數值 = soliders.Length - Mathf.RoundToInt(minus);
+            for (int i = 0; i < 數值; i++)
+            {
+                Destroy(soliders[i]);
+            }
+            Destroy(this.gameObject) ;
         }
+        else { }
     }
     void 尋找小兵數()
     {
+        soliders = null;
         soliders = GameObject.FindGameObjectsWithTag("小兵");        
     }
     void 增加小兵(Collider other)
