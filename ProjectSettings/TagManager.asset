@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - "\u6211\u65B9\u5B50\u5F48"
+  - "\u5C0F\u5175"
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -12,7 +14,7 @@ TagManager:
   - "\u9810\u9632\u78B0\u649E"
   - Water
   - UI
-  - 
+  - Floor
   - 
   - 
   - 

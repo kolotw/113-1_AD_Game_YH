@@ -4,11 +4,12 @@ public class 玩家控制器 : MonoBehaviour
 {
     public GameObject 子彈;
     public Transform 發射點;
+    public LayerMask layerMask;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //InvokeRepeating("發射子彈", 1f, 0.5f);
+        InvokeRepeating("發射子彈", 1f, 0.5f);
     }
 
     // Update is called once per frame
@@ -21,7 +22,7 @@ public class 玩家控制器 : MonoBehaviour
             RaycastHit hit;
 
             // 使用 Raycast 檢測，確保射線擊中目標圖層
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 if (hit.transform.tag == "Floor")
                 {
