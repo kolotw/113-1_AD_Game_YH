@@ -11,10 +11,13 @@ public class 小兵的行為 : MonoBehaviour
 
     public GameObject 子彈;
     public Transform 發射點;
-
+    //public 遊戲管理員 GM;
+    public GameObject GM;
     // Start is called before the first frame update
     void Start()
     {
+        GM = GameObject.Find("00遊戲管理員");
+        
         專員 = GetComponent<NavMeshAgent>();
         //目標 = GameObject.Find("Player").transform;
         
@@ -22,7 +25,8 @@ public class 小兵的行為 : MonoBehaviour
         if (this.tag == "小兵") 
         {
             目標 = GameObject.FindWithTag("敵人").transform;
-            鎖定方向.y = 0; 
+            鎖定方向.y = 0;
+            InvokeRepeating("發射子彈", 1f, 0.5f);
         }
         else if(this.tag == "敵人")
         {
@@ -33,7 +37,8 @@ public class 小兵的行為 : MonoBehaviour
 
         專員.SetDestination(目標.position);
 
-        InvokeRepeating("發射子彈", 1f, 0.5f);
+        
+        
     }
     void 發射子彈()
     {
@@ -44,11 +49,14 @@ public class 小兵的行為 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GM.GetComponent<遊戲管理員>().isLost || GM.GetComponent<遊戲管理員>().isWon) return;
+
         if (目標 == null)
         {
             if (this.tag == "敵人")
             {
                 目標 = GameObject.FindWithTag("小兵").transform;
+                if (目標 == null) return;
             }
             else if (this.tag == "小兵")
             {

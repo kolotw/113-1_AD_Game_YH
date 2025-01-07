@@ -29,7 +29,8 @@ public class 玩家控制器 : MonoBehaviour
                     // 移動 targetObject 到擊中的位置
                     Vector3 targetPosition = hit.point;
                     targetPosition.y = 0;
-                    targetPosition.z = hit.point.z + 1;
+                    //targetPosition.z = hit.point.z + 1;
+                    targetPosition.z = 1.5f;
                     this.transform.position = targetPosition;
                 }
             }

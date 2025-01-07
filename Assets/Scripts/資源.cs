@@ -21,7 +21,7 @@ public class 資源 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Translate(Vector3.back * 3.2f * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
