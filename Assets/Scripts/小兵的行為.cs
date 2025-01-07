@@ -8,6 +8,10 @@ public class 小兵的行為 : MonoBehaviour
     NavMeshAgent 專員;
     Transform 目標;
     Vector3 鎖定方向;
+
+    public GameObject 子彈;
+    public Transform 發射點;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +32,15 @@ public class 小兵的行為 : MonoBehaviour
         else { }
 
         專員.SetDestination(目標.position);
-    }
 
+        InvokeRepeating("發射子彈", 1f, 0.5f);
+    }
+    void 發射子彈()
+    {
+        GameObject bb = Instantiate(子彈, 發射點.position, Quaternion.identity);
+        bb.GetComponent<Rigidbody>().AddForce(Vector3.forward * 100000f * Time.deltaTime);
+        Destroy(bb, 2f);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -62,7 +73,7 @@ public class 小兵的行為 : MonoBehaviour
     {
         if(this.tag == "敵人")
         {
-            if(other.tag == "我方子彈")
+            if((other.tag == "我方子彈") || (other.tag == "小兵"))
             {
                 Destroy(other.gameObject);
                 Destroy(this.gameObject);
