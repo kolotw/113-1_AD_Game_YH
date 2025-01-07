@@ -26,7 +26,7 @@ public class 小兵的行為 : MonoBehaviour
         {
             目標 = GameObject.FindWithTag("敵人").transform;
             鎖定方向.y = 0;
-            InvokeRepeating("發射子彈", 1f, 0.5f);
+            InvokeRepeating("發射子彈", 1f, 3.0f);
         }
         else if(this.tag == "敵人")
         {
