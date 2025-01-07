@@ -12,18 +12,41 @@ public class 小兵的行為 : MonoBehaviour
     void Start()
     {
         專員 = GetComponent<NavMeshAgent>();
-        目標 = GameObject.Find("Player").transform;
-        專員.SetDestination(目標.position);
-        鎖定方向 = this.transform.eulerAngles;
-        if (this.tag == "小兵") { 鎖定方向.y = 0; }
-        else if(this.tag == "敵人"){鎖定方向.y = 180;}
-        else { }
+        //目標 = GameObject.Find("Player").transform;
         
+        鎖定方向 = this.transform.eulerAngles;
+        if (this.tag == "小兵") 
+        {
+            目標 = GameObject.FindWithTag("敵人").transform;
+            鎖定方向.y = 0; 
+        }
+        else if(this.tag == "敵人")
+        {
+            目標 = GameObject.FindWithTag("小兵").transform;
+            鎖定方向.y = 180;
+        }
+        else { }
+
+        專員.SetDestination(目標.position);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (目標 == null)
+        {
+            if (this.tag == "敵人")
+            {
+                目標 = GameObject.FindWithTag("小兵").transform;
+            }
+            else if (this.tag == "小兵")
+            {
+                目標 = GameObject.FindWithTag("敵人").transform;
+                if (目標 == null) return;
+            }
+        }
+            
+
         this.transform.eulerAngles = 鎖定方向; 
         if(Vector3.Distance(this.transform.position,目標.position) > 3.2f)
         {
